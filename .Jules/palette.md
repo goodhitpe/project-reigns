@@ -1,0 +1,3 @@
+## 2024-05-24 - Semantic Roles for Custom Selection UIs
+**Learning:** When using custom styled interactive lists of `<button>` elements as radio options (like the methodology/target cards on the start screen), screen readers often read them simply as standalone buttons.
+**Action:** Wrap custom selectable button groups in `role="radiogroup"` using `aria-labelledby`, and give each child `<button>` `role="radio"` with `aria-checked` to dynamically reflect its state. This transforms the UX from an ambiguous list of buttons into an intuitive radio control group.

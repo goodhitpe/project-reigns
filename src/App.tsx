@@ -185,7 +185,7 @@ export default function App() {
       {/* Header */}
       <header className="p-4 bg-gray-900 border-b border-gray-800 flex items-center justify-between sticky top-0 z-10">
         <div className="flex items-center gap-2">
-          <span className="text-xl">👑</span>
+          <span className="text-xl" aria-hidden="true">👑</span>
           <div>
             <h1 className="font-extrabold text-sm tracking-wider text-teal-400">PROJECT REIGNS</h1>
             <p className="text-xs text-gray-400">IT 프로젝트 시뮬레이터</p>
@@ -206,7 +206,7 @@ export default function App() {
         {gameState === 'START' && (
           <div className="flex-1 flex flex-col justify-center py-6">
             <div className="text-center mb-8 animate-float">
-              <span className="text-6xl block mb-3">💻</span>
+              <span className="text-6xl block mb-3" aria-hidden="true">💻</span>
               <h2 className="text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-indigo-400">
                 IT 프로젝트 수호자
               </h2>
@@ -217,16 +217,18 @@ export default function App() {
 
             {/* 1. Methodology Selection */}
             <div className="space-y-3 mb-6">
-              <label className="text-xs font-bold uppercase tracking-wider text-teal-400 flex items-center gap-1">
+              <h3 id="methodology-label" className="text-xs font-bold uppercase tracking-wider text-teal-400 flex items-center gap-1">
                 <Layers className="w-3.5 h-3.5" /> 1. 개발 방법론 선택
-              </label>
-              <div className="grid grid-cols-1 gap-2.5">
+              </h3>
+              <div className="grid grid-cols-1 gap-2.5" role="radiogroup" aria-labelledby="methodology-label">
                 {METHODOLOGIES.map((methodology) => (
                   <button
                     key={methodology.id}
+                    role="radio"
+                    aria-checked={selectedMethodology.id === methodology.id}
                     data-testid={`methodology-${methodology.id}`}
                     onClick={() => setSelectedMethodology(methodology)}
-                    className={`p-3 text-left rounded-xl border text-sm transition-all duration-200 ${
+                    className={`p-3 text-left rounded-xl border text-sm transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-950 focus-visible:ring-teal-400 ${
                       selectedMethodology.id === methodology.id
                         ? 'bg-teal-950/50 border-teal-400 text-teal-200 shadow-md shadow-teal-950'
                         : 'bg-gray-900/60 border-gray-800 text-gray-300 hover:border-gray-700'
@@ -246,16 +248,18 @@ export default function App() {
 
             {/* 2. Target Selection */}
             <div className="space-y-3 mb-8">
-              <label className="text-xs font-bold uppercase tracking-wider text-indigo-400 flex items-center gap-1">
+              <h3 id="target-label" className="text-xs font-bold uppercase tracking-wider text-indigo-400 flex items-center gap-1">
                 <Target className="w-3.5 h-3.5" /> 2. 프로젝트 목표 설정
-              </label>
-              <div className="grid grid-cols-1 gap-2.5">
+              </h3>
+              <div className="grid grid-cols-1 gap-2.5" role="radiogroup" aria-labelledby="target-label">
                 {TARGETS.map((target) => (
                   <button
                     key={target.id}
+                    role="radio"
+                    aria-checked={selectedTarget.id === target.id}
                     data-testid={`target-${target.id}`}
                     onClick={() => setSelectedTarget(target)}
-                    className={`p-3 text-left rounded-xl border text-sm transition-all duration-200 ${
+                    className={`p-3 text-left rounded-xl border text-sm transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-950 focus-visible:ring-indigo-400 ${
                       selectedTarget.id === target.id
                         ? 'bg-indigo-950/50 border-indigo-400 text-indigo-200 shadow-md shadow-indigo-950'
                         : 'bg-gray-900/60 border-gray-800 text-gray-300 hover:border-gray-700'
@@ -277,9 +281,9 @@ export default function App() {
             <button
               data-testid="start-game-btn"
               onClick={startGame}
-              className="w-full py-4 bg-gradient-to-r from-teal-500 to-indigo-500 text-black font-extrabold text-sm tracking-wider uppercase rounded-xl hover:opacity-95 active:scale-[0.98] transition-all flex items-center justify-center gap-2 shadow-lg shadow-teal-950/50"
+              className="w-full py-4 bg-gradient-to-r from-teal-500 to-indigo-500 text-black font-extrabold text-sm tracking-wider uppercase rounded-xl hover:opacity-95 active:scale-[0.98] transition-all flex items-center justify-center gap-2 shadow-lg shadow-teal-950/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-950 focus-visible:ring-teal-400"
             >
-              <span>🚀</span> 프로젝트 시뮬레이션 시작
+              <span aria-hidden="true">🚀</span> 프로젝트 시뮬레이션 시작
             </button>
           </div>
         )}
@@ -413,7 +417,7 @@ export default function App() {
                 onMouseEnter={() => setHoveredChoice('LEFT')}
                 onMouseLeave={() => setHoveredChoice(null)}
                 onClick={() => makeChoice(currentCard.leftChoice)}
-                className="w-full p-3.5 bg-gray-900/80 hover:bg-teal-950/40 border border-gray-800 hover:border-teal-400 text-left rounded-xl transition-all duration-150 flex items-start gap-2.5 shadow hover:shadow-teal-950"
+                className="w-full p-3.5 bg-gray-900/80 hover:bg-teal-950/40 border border-gray-800 hover:border-teal-400 text-left rounded-xl transition-all duration-150 flex items-start gap-2.5 shadow hover:shadow-teal-950 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-950 focus-visible:ring-teal-400"
               >
                 <div className="w-5 h-5 rounded-full bg-teal-950 border border-teal-700/60 flex items-center justify-center text-[10px] text-teal-400 font-bold shrink-0 mt-0.5">
                   <ChevronLeft className="w-3.5 h-3.5" />
@@ -430,7 +434,7 @@ export default function App() {
                 onMouseEnter={() => setHoveredChoice('RIGHT')}
                 onMouseLeave={() => setHoveredChoice(null)}
                 onClick={() => makeChoice(currentCard.rightChoice)}
-                className="w-full p-3.5 bg-gray-900/80 hover:bg-indigo-950/40 border border-gray-800 hover:border-indigo-400 text-right rounded-xl transition-all duration-150 flex items-start justify-end gap-2.5 shadow hover:shadow-indigo-950"
+                className="w-full p-3.5 bg-gray-900/80 hover:bg-indigo-950/40 border border-gray-800 hover:border-indigo-400 text-right rounded-xl transition-all duration-150 flex items-start justify-end gap-2.5 shadow hover:shadow-indigo-950 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-950 focus-visible:ring-indigo-400"
               >
                 <div className="order-2 w-5 h-5 rounded-full bg-indigo-950 border border-indigo-700/60 flex items-center justify-center text-[10px] text-indigo-400 font-bold shrink-0 mt-0.5">
                   <ChevronRight className="w-3.5 h-3.5" />
@@ -455,7 +459,7 @@ export default function App() {
         {/* SCREEN 3: GAME OVER */}
         {gameState === 'GAMEOVER' && (
           <div className="flex-1 flex flex-col justify-center py-6 text-center">
-            <span className="text-6xl block mb-4 animate-shake">💥</span>
+            <span className="text-6xl block mb-4 animate-shake" aria-hidden="true">💥</span>
             <h2 className="text-2xl font-black text-rose-500 mb-1">프로젝트 좌초 (Game Over)</h2>
             <p className="text-xs text-rose-400 font-bold uppercase tracking-widest mb-6">최종 생존: {turn}턴</p>
 
@@ -499,7 +503,7 @@ export default function App() {
             <button
               data-testid="restart-game-btn"
               onClick={() => setGameState('START')}
-              className="w-full py-4 bg-gradient-to-r from-teal-500 to-indigo-500 text-black font-extrabold text-sm tracking-wider uppercase rounded-xl hover:opacity-95 active:scale-[0.98] transition-all flex items-center justify-center gap-2"
+              className="w-full py-4 bg-gradient-to-r from-teal-500 to-indigo-500 text-black font-extrabold text-sm tracking-wider uppercase rounded-xl hover:opacity-95 active:scale-[0.98] transition-all flex items-center justify-center gap-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-950 focus-visible:ring-teal-400"
             >
               <RefreshCw className="w-4 h-4" /> 다시 도전하기
             </button>
@@ -509,7 +513,7 @@ export default function App() {
         {/* SCREEN 4: VICTORY */}
         {gameState === 'VICTORY' && (
           <div className="flex-1 flex flex-col justify-center py-6 text-center">
-            <span className="text-6xl block mb-4 animate-float">🎉</span>
+            <span className="text-6xl block mb-4 animate-float" aria-hidden="true">🎉</span>
             <h2 className="text-2xl font-black text-emerald-400 mb-1">프로젝트 성공 배포!</h2>
             <p className="text-xs text-emerald-400/80 font-bold uppercase tracking-widest mb-6">
               목표 달성: {selectedTarget.victoryTurns}턴 완수 ({selectedMethodology.name})
@@ -556,7 +560,7 @@ export default function App() {
             <button
               data-testid="restart-game-btn"
               onClick={() => setGameState('START')}
-              className="w-full py-4 bg-gradient-to-r from-teal-500 to-indigo-500 text-black font-extrabold text-sm tracking-wider uppercase rounded-xl hover:opacity-95 active:scale-[0.98] transition-all flex items-center justify-center gap-2"
+              className="w-full py-4 bg-gradient-to-r from-teal-500 to-indigo-500 text-black font-extrabold text-sm tracking-wider uppercase rounded-xl hover:opacity-95 active:scale-[0.98] transition-all flex items-center justify-center gap-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-950 focus-visible:ring-teal-400"
             >
               <RefreshCw className="w-4 h-4" /> 새 프로젝트 설계하기
             </button>
