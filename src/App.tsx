@@ -217,16 +217,18 @@ export default function App() {
 
             {/* 1. Methodology Selection */}
             <div className="space-y-3 mb-6">
-              <label className="text-xs font-bold uppercase tracking-wider text-teal-400 flex items-center gap-1">
+              <label id="methodology-label" className="text-xs font-bold uppercase tracking-wider text-teal-400 flex items-center gap-1">
                 <Layers className="w-3.5 h-3.5" /> 1. 개발 방법론 선택
               </label>
-              <div className="grid grid-cols-1 gap-2.5">
+              <div className="grid grid-cols-1 gap-2.5" role="radiogroup" aria-labelledby="methodology-label">
                 {METHODOLOGIES.map((methodology) => (
                   <button
                     key={methodology.id}
+                    role="radio"
+                    aria-checked={selectedMethodology.id === methodology.id}
                     data-testid={`methodology-${methodology.id}`}
                     onClick={() => setSelectedMethodology(methodology)}
-                    className={`p-3 text-left rounded-xl border text-sm transition-all duration-200 ${
+                    className={`p-3 text-left rounded-xl border text-sm transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-400 ${
                       selectedMethodology.id === methodology.id
                         ? 'bg-teal-950/50 border-teal-400 text-teal-200 shadow-md shadow-teal-950'
                         : 'bg-gray-900/60 border-gray-800 text-gray-300 hover:border-gray-700'
@@ -246,16 +248,18 @@ export default function App() {
 
             {/* 2. Target Selection */}
             <div className="space-y-3 mb-8">
-              <label className="text-xs font-bold uppercase tracking-wider text-indigo-400 flex items-center gap-1">
+              <label id="target-label" className="text-xs font-bold uppercase tracking-wider text-indigo-400 flex items-center gap-1">
                 <Target className="w-3.5 h-3.5" /> 2. 프로젝트 목표 설정
               </label>
-              <div className="grid grid-cols-1 gap-2.5">
+              <div className="grid grid-cols-1 gap-2.5" role="radiogroup" aria-labelledby="target-label">
                 {TARGETS.map((target) => (
                   <button
                     key={target.id}
+                    role="radio"
+                    aria-checked={selectedTarget.id === target.id}
                     data-testid={`target-${target.id}`}
                     onClick={() => setSelectedTarget(target)}
-                    className={`p-3 text-left rounded-xl border text-sm transition-all duration-200 ${
+                    className={`p-3 text-left rounded-xl border text-sm transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 ${
                       selectedTarget.id === target.id
                         ? 'bg-indigo-950/50 border-indigo-400 text-indigo-200 shadow-md shadow-indigo-950'
                         : 'bg-gray-900/60 border-gray-800 text-gray-300 hover:border-gray-700'
@@ -412,8 +416,10 @@ export default function App() {
                 data-testid="choice-left-btn"
                 onMouseEnter={() => setHoveredChoice('LEFT')}
                 onMouseLeave={() => setHoveredChoice(null)}
+                onFocus={() => setHoveredChoice('LEFT')}
+                onBlur={() => setHoveredChoice(null)}
                 onClick={() => makeChoice(currentCard.leftChoice)}
-                className="w-full p-3.5 bg-gray-900/80 hover:bg-teal-950/40 border border-gray-800 hover:border-teal-400 text-left rounded-xl transition-all duration-150 flex items-start gap-2.5 shadow hover:shadow-teal-950"
+                className="w-full p-3.5 bg-gray-900/80 hover:bg-teal-950/40 border border-gray-800 hover:border-teal-400 text-left rounded-xl transition-all duration-150 flex items-start gap-2.5 shadow hover:shadow-teal-950 focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-400"
               >
                 <div className="w-5 h-5 rounded-full bg-teal-950 border border-teal-700/60 flex items-center justify-center text-[10px] text-teal-400 font-bold shrink-0 mt-0.5">
                   <ChevronLeft className="w-3.5 h-3.5" />
@@ -429,8 +435,10 @@ export default function App() {
                 data-testid="choice-right-btn"
                 onMouseEnter={() => setHoveredChoice('RIGHT')}
                 onMouseLeave={() => setHoveredChoice(null)}
+                onFocus={() => setHoveredChoice('RIGHT')}
+                onBlur={() => setHoveredChoice(null)}
                 onClick={() => makeChoice(currentCard.rightChoice)}
-                className="w-full p-3.5 bg-gray-900/80 hover:bg-indigo-950/40 border border-gray-800 hover:border-indigo-400 text-right rounded-xl transition-all duration-150 flex items-start justify-end gap-2.5 shadow hover:shadow-indigo-950"
+                className="w-full p-3.5 bg-gray-900/80 hover:bg-indigo-950/40 border border-gray-800 hover:border-indigo-400 text-right rounded-xl transition-all duration-150 flex items-start justify-end gap-2.5 shadow hover:shadow-indigo-950 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400"
               >
                 <div className="order-2 w-5 h-5 rounded-full bg-indigo-950 border border-indigo-700/60 flex items-center justify-center text-[10px] text-indigo-400 font-bold shrink-0 mt-0.5">
                   <ChevronRight className="w-3.5 h-3.5" />

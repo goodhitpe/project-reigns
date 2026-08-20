@@ -37,10 +37,10 @@ test.describe('Project Reigns - Game Loop Tests', () => {
     await expect(page.locator('text=TURN 1 / 40')).toBeVisible();
 
     // Verify resource bars are visible
-    await expect(page.locator('text=예산')).toBeVisible();
-    await expect(page.locator('text=일정')).toBeVisible();
-    await expect(page.locator('text=사기')).toBeVisible();
-    await expect(page.locator('text=품질')).toBeVisible();
+    await expect(page.locator('text=예산').first()).toBeVisible();
+    await expect(page.locator('text=일정').first()).toBeVisible();
+    await expect(page.locator('text=사기').first()).toBeVisible();
+    await expect(page.locator('text=품질').first()).toBeVisible();
 
     // Choice buttons are present
     const leftBtn = page.getByTestId('choice-left-btn');
