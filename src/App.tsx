@@ -226,7 +226,7 @@ export default function App() {
                     key={methodology.id}
                     data-testid={`methodology-${methodology.id}`}
                     onClick={() => setSelectedMethodology(methodology)}
-                    className={`p-3 text-left rounded-xl border text-sm transition-all duration-200 ${
+                    className={`p-3 text-left rounded-xl border text-sm transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 ${
                       selectedMethodology.id === methodology.id
                         ? 'bg-teal-950/50 border-teal-400 text-teal-200 shadow-md shadow-teal-950'
                         : 'bg-gray-900/60 border-gray-800 text-gray-300 hover:border-gray-700'
@@ -255,7 +255,7 @@ export default function App() {
                     key={target.id}
                     data-testid={`target-${target.id}`}
                     onClick={() => setSelectedTarget(target)}
-                    className={`p-3 text-left rounded-xl border text-sm transition-all duration-200 ${
+                    className={`p-3 text-left rounded-xl border text-sm transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 ${
                       selectedTarget.id === target.id
                         ? 'bg-indigo-950/50 border-indigo-400 text-indigo-200 shadow-md shadow-indigo-950'
                         : 'bg-gray-900/60 border-gray-800 text-gray-300 hover:border-gray-700'
@@ -277,7 +277,7 @@ export default function App() {
             <button
               data-testid="start-game-btn"
               onClick={startGame}
-              className="w-full py-4 bg-gradient-to-r from-teal-500 to-indigo-500 text-black font-extrabold text-sm tracking-wider uppercase rounded-xl hover:opacity-95 active:scale-[0.98] transition-all flex items-center justify-center gap-2 shadow-lg shadow-teal-950/50"
+              className="w-full py-4 bg-gradient-to-r from-teal-500 to-indigo-500 text-black font-extrabold text-sm tracking-wider uppercase rounded-xl hover:opacity-95 active:scale-[0.98] transition-all flex items-center justify-center gap-2 shadow-lg shadow-teal-950/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
             >
               <span>🚀</span> 프로젝트 시뮬레이션 시작
             </button>
@@ -413,7 +413,7 @@ export default function App() {
                 onMouseEnter={() => setHoveredChoice('LEFT')}
                 onMouseLeave={() => setHoveredChoice(null)}
                 onClick={() => makeChoice(currentCard.leftChoice)}
-                className="w-full p-3.5 bg-gray-900/80 hover:bg-teal-950/40 border border-gray-800 hover:border-teal-400 text-left rounded-xl transition-all duration-150 flex items-start gap-2.5 shadow hover:shadow-teal-950"
+                className="w-full p-3.5 bg-gray-900/80 hover:bg-teal-950/40 border border-gray-800 hover:border-teal-400 text-left rounded-xl transition-all duration-150 flex items-start gap-2.5 shadow hover:shadow-teal-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-400"
               >
                 <div className="w-5 h-5 rounded-full bg-teal-950 border border-teal-700/60 flex items-center justify-center text-[10px] text-teal-400 font-bold shrink-0 mt-0.5">
                   <ChevronLeft className="w-3.5 h-3.5" />
@@ -430,7 +430,7 @@ export default function App() {
                 onMouseEnter={() => setHoveredChoice('RIGHT')}
                 onMouseLeave={() => setHoveredChoice(null)}
                 onClick={() => makeChoice(currentCard.rightChoice)}
-                className="w-full p-3.5 bg-gray-900/80 hover:bg-indigo-950/40 border border-gray-800 hover:border-indigo-400 text-right rounded-xl transition-all duration-150 flex items-start justify-end gap-2.5 shadow hover:shadow-indigo-950"
+                className="w-full p-3.5 bg-gray-900/80 hover:bg-indigo-950/40 border border-gray-800 hover:border-indigo-400 text-right rounded-xl transition-all duration-150 flex items-start justify-end gap-2.5 shadow hover:shadow-indigo-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400"
               >
                 <div className="order-2 w-5 h-5 rounded-full bg-indigo-950 border border-indigo-700/60 flex items-center justify-center text-[10px] text-indigo-400 font-bold shrink-0 mt-0.5">
                   <ChevronRight className="w-3.5 h-3.5" />
@@ -499,7 +499,7 @@ export default function App() {
             <button
               data-testid="restart-game-btn"
               onClick={() => setGameState('START')}
-              className="w-full py-4 bg-gradient-to-r from-teal-500 to-indigo-500 text-black font-extrabold text-sm tracking-wider uppercase rounded-xl hover:opacity-95 active:scale-[0.98] transition-all flex items-center justify-center gap-2"
+              className="w-full py-4 bg-gradient-to-r from-teal-500 to-indigo-500 text-black font-extrabold text-sm tracking-wider uppercase rounded-xl hover:opacity-95 active:scale-[0.98] transition-all flex items-center justify-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
             >
               <RefreshCw className="w-4 h-4" /> 다시 도전하기
             </button>
@@ -556,7 +556,7 @@ export default function App() {
             <button
               data-testid="restart-game-btn"
               onClick={() => setGameState('START')}
-              className="w-full py-4 bg-gradient-to-r from-teal-500 to-indigo-500 text-black font-extrabold text-sm tracking-wider uppercase rounded-xl hover:opacity-95 active:scale-[0.98] transition-all flex items-center justify-center gap-2"
+              className="w-full py-4 bg-gradient-to-r from-teal-500 to-indigo-500 text-black font-extrabold text-sm tracking-wider uppercase rounded-xl hover:opacity-95 active:scale-[0.98] transition-all flex items-center justify-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
             >
               <RefreshCw className="w-4 h-4" /> 새 프로젝트 설계하기
             </button>
