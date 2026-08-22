@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   DollarSign,
   Clock,
@@ -179,6 +179,24 @@ export default function App() {
     return choice.effects[resource] !== 0;
   };
 
+  // Keyboard navigation for choices
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (gameState !== 'PLAYING' || !currentCard || e.repeat) return;
+
+      if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        makeChoice(currentCard.leftChoice);
+      } else if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        makeChoice(currentCard.rightChoice);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [gameState, currentCard]);
+
   return (
     <div className="max-w-md mx-auto min-h-screen bg-gray-950 flex flex-col shadow-2xl relative border-x border-gray-800">
 
@@ -281,7 +299,7 @@ export default function App() {
             <button
               data-testid="start-game-btn"
               onClick={startGame}
-              className="w-full py-4 bg-gradient-to-r from-teal-500 to-indigo-500 text-black font-extrabold text-sm tracking-wider uppercase rounded-xl hover:opacity-95 active:scale-[0.98] transition-all flex items-center justify-center gap-2 shadow-lg shadow-teal-950/50"
+              className="w-full py-4 bg-gradient-to-r from-teal-500 to-indigo-500 text-black font-extrabold text-sm tracking-wider uppercase rounded-xl hover:opacity-95 active:scale-[0.98] transition-all flex items-center justify-center gap-2 shadow-lg shadow-teal-950/50 focus:outline-none focus-visible:ring-4 focus-visible:ring-teal-400/50"
             >
               <span>🚀</span> 프로젝트 시뮬레이션 시작
             </button>
@@ -425,7 +443,10 @@ export default function App() {
                   <ChevronLeft className="w-3.5 h-3.5" />
                 </div>
                 <div>
-                  <div className="text-[11px] font-black tracking-wide text-teal-400 uppercase">왼쪽 선택</div>
+                  <div className="text-[11px] font-black tracking-wide text-teal-400 uppercase">
+                    왼쪽 선택
+                    <kbd className="ml-1.5 hidden sm:inline-block text-[9px] px-1 py-0.5 bg-gray-800 rounded text-gray-400 border border-gray-700">←</kbd>
+                  </div>
                   <div className="text-xs font-semibold text-gray-200 mt-0.5">{currentCard.leftChoice.text}</div>
                 </div>
               </button>
@@ -444,7 +465,10 @@ export default function App() {
                   <ChevronRight className="w-3.5 h-3.5" />
                 </div>
                 <div className="order-1">
-                  <div className="text-[11px] font-black tracking-wide text-indigo-400 uppercase">오른쪽 선택</div>
+                  <div className="text-[11px] font-black tracking-wide text-indigo-400 uppercase">
+                    <kbd className="mr-1.5 hidden sm:inline-block text-[9px] px-1 py-0.5 bg-gray-800 rounded text-gray-400 border border-gray-700">→</kbd>
+                    오른쪽 선택
+                  </div>
                   <div className="text-xs font-semibold text-gray-200 mt-0.5">{currentCard.rightChoice.text}</div>
                 </div>
               </button>
@@ -507,7 +531,7 @@ export default function App() {
             <button
               data-testid="restart-game-btn"
               onClick={() => setGameState('START')}
-              className="w-full py-4 bg-gradient-to-r from-teal-500 to-indigo-500 text-black font-extrabold text-sm tracking-wider uppercase rounded-xl hover:opacity-95 active:scale-[0.98] transition-all flex items-center justify-center gap-2"
+              className="w-full py-4 bg-gradient-to-r from-teal-500 to-indigo-500 text-black font-extrabold text-sm tracking-wider uppercase rounded-xl hover:opacity-95 active:scale-[0.98] transition-all flex items-center justify-center gap-2 focus:outline-none focus-visible:ring-4 focus-visible:ring-teal-400/50"
             >
               <RefreshCw className="w-4 h-4" /> 다시 도전하기
             </button>
@@ -564,7 +588,7 @@ export default function App() {
             <button
               data-testid="restart-game-btn"
               onClick={() => setGameState('START')}
-              className="w-full py-4 bg-gradient-to-r from-teal-500 to-indigo-500 text-black font-extrabold text-sm tracking-wider uppercase rounded-xl hover:opacity-95 active:scale-[0.98] transition-all flex items-center justify-center gap-2"
+              className="w-full py-4 bg-gradient-to-r from-teal-500 to-indigo-500 text-black font-extrabold text-sm tracking-wider uppercase rounded-xl hover:opacity-95 active:scale-[0.98] transition-all flex items-center justify-center gap-2 focus:outline-none focus-visible:ring-4 focus-visible:ring-teal-400/50"
             >
               <RefreshCw className="w-4 h-4" /> 새 프로젝트 설계하기
             </button>
