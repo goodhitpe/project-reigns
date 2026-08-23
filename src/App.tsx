@@ -301,10 +301,10 @@ export default function App() {
                   <DollarSign className="w-4 h-4 text-emerald-400" />
                   <span className="text-[10px] font-bold text-emerald-400">예산</span>
                   {getResourceInfluence('budget') && (
-                    <span className="absolute -top-1.5 -right-1.5 w-1.5 h-1.5 rounded-full bg-teal-400 animate-ping"></span>
+                    <span className="absolute -top-1.5 -right-1.5 w-1.5 h-1.5 rounded-full bg-teal-400 animate-ping" title="Expected to change" aria-label="Expected to change"></span>
                   )}
                 </div>
-                <div className="w-full h-2 bg-gray-950 rounded-full overflow-hidden border border-gray-800">
+                <div className="w-full h-2 bg-gray-950 rounded-full overflow-hidden border border-gray-800" role="progressbar" aria-valuenow={resources.budget} aria-valuemin={0} aria-valuemax={100}>
                   <div
                     className="h-full bg-emerald-500 transition-all duration-300 rounded-full"
                     style={{ width: `${resources.budget}%` }}
@@ -319,10 +319,10 @@ export default function App() {
                   <Clock className="w-4 h-4 text-sky-400" />
                   <span className="text-[10px] font-bold text-sky-400">일정</span>
                   {getResourceInfluence('scheduleSlack') && (
-                    <span className="absolute -top-1.5 -right-1.5 w-1.5 h-1.5 rounded-full bg-teal-400 animate-ping"></span>
+                    <span className="absolute -top-1.5 -right-1.5 w-1.5 h-1.5 rounded-full bg-teal-400 animate-ping" title="Expected to change" aria-label="Expected to change"></span>
                   )}
                 </div>
-                <div className="w-full h-2 bg-gray-950 rounded-full overflow-hidden border border-gray-800">
+                <div className="w-full h-2 bg-gray-950 rounded-full overflow-hidden border border-gray-800" role="progressbar" aria-valuenow={resources.scheduleSlack} aria-valuemin={0} aria-valuemax={100}>
                   <div
                     className="h-full bg-sky-500 transition-all duration-300 rounded-full"
                     style={{ width: `${resources.scheduleSlack}%` }}
@@ -337,10 +337,10 @@ export default function App() {
                   <Smile className="w-4 h-4 text-amber-400" />
                   <span className="text-[10px] font-bold text-amber-400">사기</span>
                   {getResourceInfluence('teamMorale') && (
-                    <span className="absolute -top-1.5 -right-1.5 w-1.5 h-1.5 rounded-full bg-teal-400 animate-ping"></span>
+                    <span className="absolute -top-1.5 -right-1.5 w-1.5 h-1.5 rounded-full bg-teal-400 animate-ping" title="Expected to change" aria-label="Expected to change"></span>
                   )}
                 </div>
-                <div className="w-full h-2 bg-gray-950 rounded-full overflow-hidden border border-gray-800">
+                <div className="w-full h-2 bg-gray-950 rounded-full overflow-hidden border border-gray-800" role="progressbar" aria-valuenow={resources.teamMorale} aria-valuemin={0} aria-valuemax={100}>
                   <div
                     className="h-full bg-amber-500 transition-all duration-300 rounded-full"
                     style={{ width: `${resources.teamMorale}%` }}
@@ -355,10 +355,10 @@ export default function App() {
                   <ShieldAlert className="w-4 h-4 text-fuchsia-400" />
                   <span className="text-[10px] font-bold text-fuchsia-400">품질</span>
                   {getResourceInfluence('quality') && (
-                    <span className="absolute -top-1.5 -right-1.5 w-1.5 h-1.5 rounded-full bg-teal-400 animate-ping"></span>
+                    <span className="absolute -top-1.5 -right-1.5 w-1.5 h-1.5 rounded-full bg-teal-400 animate-ping" title="Expected to change" aria-label="Expected to change"></span>
                   )}
                 </div>
-                <div className="w-full h-2 bg-gray-950 rounded-full overflow-hidden border border-gray-800">
+                <div className="w-full h-2 bg-gray-950 rounded-full overflow-hidden border border-gray-800" role="progressbar" aria-valuenow={resources.quality} aria-valuemin={0} aria-valuemax={100}>
                   <div
                     className="h-full bg-fuchsia-500 transition-all duration-300 rounded-full"
                     style={{ width: `${resources.quality}%` }}
@@ -462,7 +462,7 @@ export default function App() {
 
         {/* SCREEN 3: GAME OVER */}
         {gameState === 'GAMEOVER' && (
-          <div className="flex-1 flex flex-col justify-center py-6 text-center">
+          <div className="flex-1 flex flex-col justify-center py-6 text-center" role="alert" aria-live="assertive">
             <span className="text-6xl block mb-4 animate-shake">💥</span>
             <h2 className="text-2xl font-black text-rose-500 mb-1">프로젝트 좌초 (Game Over)</h2>
             <p className="text-xs text-rose-400 font-bold uppercase tracking-widest mb-6">최종 생존: {turn}턴</p>
@@ -516,7 +516,7 @@ export default function App() {
 
         {/* SCREEN 4: VICTORY */}
         {gameState === 'VICTORY' && (
-          <div className="flex-1 flex flex-col justify-center py-6 text-center">
+          <div className="flex-1 flex flex-col justify-center py-6 text-center" role="alert" aria-live="assertive">
             <span className="text-6xl block mb-4 animate-float">🎉</span>
             <h2 className="text-2xl font-black text-emerald-400 mb-1">프로젝트 성공 배포!</h2>
             <p className="text-xs text-emerald-400/80 font-bold uppercase tracking-widest mb-6">
