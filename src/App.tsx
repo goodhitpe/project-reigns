@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   DollarSign,
   Clock,
@@ -172,6 +172,21 @@ export default function App() {
     setCurrentCard(remainingPool[nextRandomIndex]);
   };
 
+  // Keyboard bindings for Reigns-style left/right choice
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (gameState !== 'PLAYING' || !currentCard) return;
+      if (e.key === 'ArrowLeft') {
+        makeChoice(currentCard.leftChoice);
+      } else if (e.key === 'ArrowRight') {
+        makeChoice(currentCard.rightChoice);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [gameState, currentCard]);
+
   // Helper to check if a specific resource will change (returns '.' or '•' or similar visual clue)
   const getResourceInfluence = (resource: keyof ResourceStats) => {
     if (!currentCard || !hoveredChoice) return false;
@@ -299,12 +314,12 @@ export default function App() {
               <div className="flex flex-col items-center">
                 <div className="flex items-center gap-1 mb-1 relative">
                   <DollarSign className="w-4 h-4 text-emerald-400" />
-                  <span className="text-[10px] font-bold text-emerald-400">예산</span>
+                  <span id="label-budget" className="text-[10px] font-bold text-emerald-400">예산</span>
                   {getResourceInfluence('budget') && (
-                    <span className="absolute -top-1.5 -right-1.5 w-1.5 h-1.5 rounded-full bg-teal-400 animate-ping" title="Expected to change" aria-label="Expected to change"></span>
+                    <span className="absolute -top-1.5 -right-1.5 w-1.5 h-1.5 rounded-full bg-teal-400 animate-ping" title="수치 변동 예상" aria-label="수치 변동 예상"></span>
                   )}
                 </div>
-                <div className="w-full h-2 bg-gray-950 rounded-full overflow-hidden border border-gray-800" role="progressbar" aria-valuenow={resources.budget} aria-valuemin={0} aria-valuemax={100}>
+                <div className="w-full h-2 bg-gray-950 rounded-full overflow-hidden border border-gray-800" role="progressbar" aria-labelledby="label-budget" aria-valuenow={resources.budget} aria-valuemin={0} aria-valuemax={100}>
                   <div
                     className="h-full bg-emerald-500 transition-all duration-300 rounded-full"
                     style={{ width: `${resources.budget}%` }}
@@ -317,12 +332,12 @@ export default function App() {
               <div className="flex flex-col items-center">
                 <div className="flex items-center gap-1 mb-1 relative">
                   <Clock className="w-4 h-4 text-sky-400" />
-                  <span className="text-[10px] font-bold text-sky-400">일정</span>
+                  <span id="label-scheduleSlack" className="text-[10px] font-bold text-sky-400">일정</span>
                   {getResourceInfluence('scheduleSlack') && (
-                    <span className="absolute -top-1.5 -right-1.5 w-1.5 h-1.5 rounded-full bg-teal-400 animate-ping" title="Expected to change" aria-label="Expected to change"></span>
+                    <span className="absolute -top-1.5 -right-1.5 w-1.5 h-1.5 rounded-full bg-teal-400 animate-ping" title="수치 변동 예상" aria-label="수치 변동 예상"></span>
                   )}
                 </div>
-                <div className="w-full h-2 bg-gray-950 rounded-full overflow-hidden border border-gray-800" role="progressbar" aria-valuenow={resources.scheduleSlack} aria-valuemin={0} aria-valuemax={100}>
+                <div className="w-full h-2 bg-gray-950 rounded-full overflow-hidden border border-gray-800" role="progressbar" aria-labelledby="label-scheduleSlack" aria-valuenow={resources.scheduleSlack} aria-valuemin={0} aria-valuemax={100}>
                   <div
                     className="h-full bg-sky-500 transition-all duration-300 rounded-full"
                     style={{ width: `${resources.scheduleSlack}%` }}
@@ -335,12 +350,12 @@ export default function App() {
               <div className="flex flex-col items-center">
                 <div className="flex items-center gap-1 mb-1 relative">
                   <Smile className="w-4 h-4 text-amber-400" />
-                  <span className="text-[10px] font-bold text-amber-400">사기</span>
+                  <span id="label-teamMorale" className="text-[10px] font-bold text-amber-400">사기</span>
                   {getResourceInfluence('teamMorale') && (
-                    <span className="absolute -top-1.5 -right-1.5 w-1.5 h-1.5 rounded-full bg-teal-400 animate-ping" title="Expected to change" aria-label="Expected to change"></span>
+                    <span className="absolute -top-1.5 -right-1.5 w-1.5 h-1.5 rounded-full bg-teal-400 animate-ping" title="수치 변동 예상" aria-label="수치 변동 예상"></span>
                   )}
                 </div>
-                <div className="w-full h-2 bg-gray-950 rounded-full overflow-hidden border border-gray-800" role="progressbar" aria-valuenow={resources.teamMorale} aria-valuemin={0} aria-valuemax={100}>
+                <div className="w-full h-2 bg-gray-950 rounded-full overflow-hidden border border-gray-800" role="progressbar" aria-labelledby="label-teamMorale" aria-valuenow={resources.teamMorale} aria-valuemin={0} aria-valuemax={100}>
                   <div
                     className="h-full bg-amber-500 transition-all duration-300 rounded-full"
                     style={{ width: `${resources.teamMorale}%` }}
@@ -353,12 +368,12 @@ export default function App() {
               <div className="flex flex-col items-center">
                 <div className="flex items-center gap-1 mb-1 relative">
                   <ShieldAlert className="w-4 h-4 text-fuchsia-400" />
-                  <span className="text-[10px] font-bold text-fuchsia-400">품질</span>
+                  <span id="label-quality" className="text-[10px] font-bold text-fuchsia-400">품질</span>
                   {getResourceInfluence('quality') && (
-                    <span className="absolute -top-1.5 -right-1.5 w-1.5 h-1.5 rounded-full bg-teal-400 animate-ping" title="Expected to change" aria-label="Expected to change"></span>
+                    <span className="absolute -top-1.5 -right-1.5 w-1.5 h-1.5 rounded-full bg-teal-400 animate-ping" title="수치 변동 예상" aria-label="수치 변동 예상"></span>
                   )}
                 </div>
-                <div className="w-full h-2 bg-gray-950 rounded-full overflow-hidden border border-gray-800" role="progressbar" aria-valuenow={resources.quality} aria-valuemin={0} aria-valuemax={100}>
+                <div className="w-full h-2 bg-gray-950 rounded-full overflow-hidden border border-gray-800" role="progressbar" aria-labelledby="label-quality" aria-valuenow={resources.quality} aria-valuemin={0} aria-valuemax={100}>
                   <div
                     className="h-full bg-fuchsia-500 transition-all duration-300 rounded-full"
                     style={{ width: `${resources.quality}%` }}
@@ -425,7 +440,10 @@ export default function App() {
                   <ChevronLeft className="w-3.5 h-3.5" />
                 </div>
                 <div>
-                  <div className="text-[11px] font-black tracking-wide text-teal-400 uppercase">왼쪽 선택</div>
+                  <div className="text-[11px] font-black tracking-wide text-teal-400 uppercase flex items-center gap-1.5">
+                    왼쪽 선택
+                    <kbd className="hidden sm:inline-block px-1 py-0.5 bg-gray-800 text-gray-400 rounded text-[9px] border border-gray-700 font-mono" aria-hidden="true">[←]</kbd>
+                  </div>
                   <div className="text-xs font-semibold text-gray-200 mt-0.5">{currentCard.leftChoice.text}</div>
                 </div>
               </button>
@@ -444,7 +462,10 @@ export default function App() {
                   <ChevronRight className="w-3.5 h-3.5" />
                 </div>
                 <div className="order-1">
-                  <div className="text-[11px] font-black tracking-wide text-indigo-400 uppercase">오른쪽 선택</div>
+                  <div className="text-[11px] font-black tracking-wide text-indigo-400 uppercase flex items-center gap-1.5 justify-end">
+                    <kbd className="hidden sm:inline-block px-1 py-0.5 bg-gray-800 text-gray-400 rounded text-[9px] border border-gray-700 font-mono" aria-hidden="true">[→]</kbd>
+                    오른쪽 선택
+                  </div>
                   <div className="text-xs font-semibold text-gray-200 mt-0.5">{currentCard.rightChoice.text}</div>
                 </div>
               </button>
@@ -579,7 +600,7 @@ export default function App() {
           <h3 className="text-[10px] font-black uppercase tracking-wider text-gray-400 flex items-center gap-1 mb-2">
             <History className="w-3 h-3" /> 최근 의사결정 히스토리 (최신순)
           </h3>
-          <div className="space-y-2">
+          <div className="space-y-2" aria-live="polite">
             {log.slice(0, 5).map((entry, idx) => (
               <div key={idx} className="text-[10px] border-l-2 border-teal-500/40 pl-2 leading-relaxed">
                 <div className="flex justify-between text-gray-400">

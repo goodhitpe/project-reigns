@@ -9,3 +9,7 @@
 ## 2024-03-02 - ARIA Roles for Game Progress and End States
 **Learning:** Resource bars and critical game states like "GAMEOVER" or "VICTORY" need explicit ARIA roles to be accessible to screen readers.
 **Action:** Use `role="progressbar"` with `aria-valuenow` for resource bars, and `role="alert"` with `aria-live="assertive"` for critical game state announcements.
+
+## 2025-02-28 - Native Keyboard Navigation & ARIA Localization in Choice Games
+**Learning:** In choice-based game mechanics (like swipe or dual-button games), mouse-only UI forces keyboard users to tab excessively. Furthermore, hidden ARIA attributes like `title` and `aria-label` are often forgotten during i18n/localization passes, leading to screen reader mismatch.
+**Action:** Bind native keyboard keys (e.g. `ArrowLeft`, `ArrowRight`) to primary interactions to bypass UI traversal. Ensure all ARIA strings map strictly to the application's primary local language, and add `aria-live="polite"` on event logs to narrate the game loop smoothly.
