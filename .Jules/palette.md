@@ -5,3 +5,7 @@
 ## 2025-02-27 - Consistent Visual Weight for Keyboard Focus
 **Learning:** Standard outline `focus-visible` styles alone (like a ring) are not enough if they do not match the visual weight of mouse hover states. Users navigating via keyboard need the same level of visual feedback (e.g., background color, shadow changes) as mouse users to understand interactable elements clearly.
 **Action:** When defining focus states, especially for complex UI elements like cards or large buttons, explicitly mirror the `hover:` utility classes to `focus-visible:` states (e.g., matching `hover:bg-teal-950/40` with `focus-visible:bg-teal-950/40`).
+
+## 2024-03-02 - ARIA Roles for Game Progress and End States
+**Learning:** Resource bars and critical game states like "GAMEOVER" or "VICTORY" need explicit ARIA roles to be accessible to screen readers.
+**Action:** Use `role="progressbar"` with `aria-valuenow` for resource bars, and `role="alert"` with `aria-live="assertive"` for critical game state announcements.
