@@ -13,3 +13,7 @@
 ## 2025-02-28 - Native Keyboard Navigation & ARIA Localization in Choice Games
 **Learning:** In choice-based game mechanics (like swipe or dual-button games), mouse-only UI forces keyboard users to tab excessively. Furthermore, hidden ARIA attributes like `title` and `aria-label` are often forgotten during i18n/localization passes, leading to screen reader mismatch.
 **Action:** Bind native keyboard keys (e.g. `ArrowLeft`, `ArrowRight`) to primary interactions to bypass UI traversal. Ensure all ARIA strings map strictly to the application's primary local language, and add `aria-live="polite"` on event logs to narrate the game loop smoothly.
+
+## 2025-02-28 - Dual-Extreme Dangers in Balance Mechanics
+**Learning:** In choice/balance-based game mechanics (like Reigns), standard progress bars mislead users by implicitly suggesting 100% is a "good" or "max" state. Since both 0% and 100% cause failure, relying purely on fill length fails to communicate the true risk of overflowing a stat.
+**Action:** When working with dual-extreme stats, always add conditional "danger zone" styling (e.g. `<= 20` and `>= 80`) using urgent colors (`bg-rose-500`, `animate-pulse`), and explicitly append `<span className="sr-only">(위험)</span>` for screen readers so the critical state is clear to all users.

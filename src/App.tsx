@@ -194,6 +194,8 @@ export default function App() {
     return choice.effects[resource] !== 0;
   };
 
+  const isDangerZone = (value: number) => value <= 20 || value >= 80;
+
   return (
     <div className="max-w-md mx-auto min-h-screen bg-gray-950 flex flex-col shadow-2xl relative border-x border-gray-800">
 
@@ -321,11 +323,14 @@ export default function App() {
                 </div>
                 <div className="w-full h-2 bg-gray-950 rounded-full overflow-hidden border border-gray-800" role="progressbar" aria-labelledby="label-budget" aria-valuenow={resources.budget} aria-valuemin={0} aria-valuemax={100}>
                   <div
-                    className="h-full bg-emerald-500 transition-all duration-300 rounded-full"
+                    className={`h-full transition-all duration-300 rounded-full ${isDangerZone(resources.budget) ? 'bg-rose-500' : 'bg-emerald-500'}`}
                     style={{ width: `${resources.budget}%` }}
                   ></div>
                 </div>
-                <span className="text-[10px] text-gray-400 mt-1 font-mono font-bold">{resources.budget}%</span>
+                <span className={`text-[10px] mt-1 font-mono font-bold ${isDangerZone(resources.budget) ? 'text-rose-400 animate-pulse' : 'text-gray-400'}`}>
+                  {resources.budget}%
+                  {isDangerZone(resources.budget) && <span className="sr-only">(위험)</span>}
+                </span>
               </div>
 
               {/* Schedule Slack */}
@@ -339,11 +344,14 @@ export default function App() {
                 </div>
                 <div className="w-full h-2 bg-gray-950 rounded-full overflow-hidden border border-gray-800" role="progressbar" aria-labelledby="label-scheduleSlack" aria-valuenow={resources.scheduleSlack} aria-valuemin={0} aria-valuemax={100}>
                   <div
-                    className="h-full bg-sky-500 transition-all duration-300 rounded-full"
+                    className={`h-full transition-all duration-300 rounded-full ${isDangerZone(resources.scheduleSlack) ? 'bg-rose-500' : 'bg-sky-500'}`}
                     style={{ width: `${resources.scheduleSlack}%` }}
                   ></div>
                 </div>
-                <span className="text-[10px] text-gray-400 mt-1 font-mono font-bold">{resources.scheduleSlack}%</span>
+                <span className={`text-[10px] mt-1 font-mono font-bold ${isDangerZone(resources.scheduleSlack) ? 'text-rose-400 animate-pulse' : 'text-gray-400'}`}>
+                  {resources.scheduleSlack}%
+                  {isDangerZone(resources.scheduleSlack) && <span className="sr-only">(위험)</span>}
+                </span>
               </div>
 
               {/* Team Morale */}
@@ -357,11 +365,14 @@ export default function App() {
                 </div>
                 <div className="w-full h-2 bg-gray-950 rounded-full overflow-hidden border border-gray-800" role="progressbar" aria-labelledby="label-teamMorale" aria-valuenow={resources.teamMorale} aria-valuemin={0} aria-valuemax={100}>
                   <div
-                    className="h-full bg-amber-500 transition-all duration-300 rounded-full"
+                    className={`h-full transition-all duration-300 rounded-full ${isDangerZone(resources.teamMorale) ? 'bg-rose-500' : 'bg-amber-500'}`}
                     style={{ width: `${resources.teamMorale}%` }}
                   ></div>
                 </div>
-                <span className="text-[10px] text-gray-400 mt-1 font-mono font-bold">{resources.teamMorale}%</span>
+                <span className={`text-[10px] mt-1 font-mono font-bold ${isDangerZone(resources.teamMorale) ? 'text-rose-400 animate-pulse' : 'text-gray-400'}`}>
+                  {resources.teamMorale}%
+                  {isDangerZone(resources.teamMorale) && <span className="sr-only">(위험)</span>}
+                </span>
               </div>
 
               {/* Quality */}
@@ -375,11 +386,14 @@ export default function App() {
                 </div>
                 <div className="w-full h-2 bg-gray-950 rounded-full overflow-hidden border border-gray-800" role="progressbar" aria-labelledby="label-quality" aria-valuenow={resources.quality} aria-valuemin={0} aria-valuemax={100}>
                   <div
-                    className="h-full bg-fuchsia-500 transition-all duration-300 rounded-full"
+                    className={`h-full transition-all duration-300 rounded-full ${isDangerZone(resources.quality) ? 'bg-rose-500' : 'bg-fuchsia-500'}`}
                     style={{ width: `${resources.quality}%` }}
                   ></div>
                 </div>
-                <span className="text-[10px] text-gray-400 mt-1 font-mono font-bold">{resources.quality}%</span>
+                <span className={`text-[10px] mt-1 font-mono font-bold ${isDangerZone(resources.quality) ? 'text-rose-400 animate-pulse' : 'text-gray-400'}`}>
+                  {resources.quality}%
+                  {isDangerZone(resources.quality) && <span className="sr-only">(위험)</span>}
+                </span>
               </div>
 
             </div>
