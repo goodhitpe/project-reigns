@@ -595,21 +595,27 @@ export default function App() {
       </main>
 
       {/* History Log Panel (only visible when playing or after finishing) */}
-      {log.length > 0 && (
-        <section className="bg-gray-900/80 border-t border-gray-800 max-h-[140px] overflow-y-auto p-3">
-          <h3 className="text-[10px] font-black uppercase tracking-wider text-gray-400 flex items-center gap-1 mb-2">
+      {gameState !== 'START' && (
+        <section className="bg-gray-900/80 border-t border-gray-800 h-[140px] flex flex-col p-3">
+          <h3 className="text-[10px] font-black uppercase tracking-wider text-gray-400 flex items-center gap-1 mb-2 shrink-0">
             <History className="w-3 h-3" /> 최근 의사결정 히스토리 (최신순)
           </h3>
-          <div className="space-y-2" aria-live="polite">
-            {log.slice(0, 5).map((entry, idx) => (
-              <div key={idx} className="text-[10px] border-l-2 border-teal-500/40 pl-2 leading-relaxed">
-                <div className="flex justify-between text-gray-400">
-                  <span className="font-bold text-teal-400">Turn {entry.turn} • {entry.character}</span>
-                  <span className="text-[9px] bg-gray-950 px-1.5 py-0.2 rounded text-gray-400">선택: {entry.choiceText}</span>
-                </div>
-                <p className="text-gray-300 mt-0.5">{entry.outcomeText}</p>
+          <div className="space-y-2 flex-1 overflow-y-auto pr-1" aria-live="polite">
+            {log.length === 0 ? (
+              <div className="h-full flex items-center justify-center text-[11px] text-gray-500 font-medium italic">
+                아직 진행된 의사결정이 없습니다. 첫 번째 선택을 내려주세요!
               </div>
-            ))}
+            ) : (
+              log.slice(0, 5).map((entry, idx) => (
+                <div key={idx} className="text-[10px] border-l-2 border-teal-500/40 pl-2 leading-relaxed">
+                  <div className="flex justify-between text-gray-400">
+                    <span className="font-bold text-teal-400">Turn {entry.turn} • {entry.character}</span>
+                    <span className="text-[9px] bg-gray-950 px-1.5 py-0.2 rounded text-gray-400">선택: {entry.choiceText}</span>
+                  </div>
+                  <p className="text-gray-300 mt-0.5">{entry.outcomeText}</p>
+                </div>
+              ))
+            )}
           </div>
         </section>
       )}

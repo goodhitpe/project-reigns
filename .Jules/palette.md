@@ -13,3 +13,7 @@
 ## 2025-02-28 - Native Keyboard Navigation & ARIA Localization in Choice Games
 **Learning:** In choice-based game mechanics (like swipe or dual-button games), mouse-only UI forces keyboard users to tab excessively. Furthermore, hidden ARIA attributes like `title` and `aria-label` are often forgotten during i18n/localization passes, leading to screen reader mismatch.
 **Action:** Bind native keyboard keys (e.g. `ArrowLeft`, `ArrowRight`) to primary interactions to bypass UI traversal. Ensure all ARIA strings map strictly to the application's primary local language, and add `aria-live="polite"` on event logs to narrate the game loop smoothly.
+
+## 2026-08-27 - Preventing Layout Jank with Empty States
+**Learning:** Conditionally rendering UI sections (like a history log) based on content availability causes abrupt layout shifts when the first item is added. This breaks visual continuity, feels unpolished, and can disorient users.
+**Action:** Instead of hiding empty containers, render them with fixed heights and helpful "empty state" messaging to establish the layout immediately and guide user expectations.
