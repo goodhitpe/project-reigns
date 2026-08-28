@@ -194,6 +194,18 @@ export default function App() {
     return choice.effects[resource] !== 0;
   };
 
+  // Helper to generate text for screen readers about which resources will be affected by a choice
+  const getAffectedResourcesText = (choice: Choice) => {
+    const affected = [];
+    if (choice.effects.budget !== 0) affected.push('예산');
+    if (choice.effects.scheduleSlack !== 0) affected.push('일정');
+    if (choice.effects.teamMorale !== 0) affected.push('사기');
+    if (choice.effects.quality !== 0) affected.push('품질');
+
+    if (affected.length === 0) return '수치 변동 없음';
+    return `예상 수치 변동: ${affected.join(', ')}`;
+  };
+
   const isDangerZone = (value: number) => value <= 20 || value >= 80;
 
   return (
@@ -450,6 +462,7 @@ export default function App() {
                 onClick={() => makeChoice(currentCard.leftChoice)}
                 className="w-full p-3.5 bg-gray-900/80 hover:bg-teal-950/40 border border-gray-800 hover:border-teal-400 text-left rounded-xl transition-all duration-150 flex items-start gap-2.5 shadow hover:shadow-teal-950 focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-400 focus-visible:bg-teal-950/40 focus-visible:border-teal-400 focus-visible:shadow-teal-950"
               >
+                <span className="sr-only">{getAffectedResourcesText(currentCard.leftChoice)}</span>
                 <div className="w-5 h-5 rounded-full bg-teal-950 border border-teal-700/60 flex items-center justify-center text-[10px] text-teal-400 font-bold shrink-0 mt-0.5">
                   <ChevronLeft className="w-3.5 h-3.5" />
                 </div>
@@ -472,6 +485,7 @@ export default function App() {
                 onClick={() => makeChoice(currentCard.rightChoice)}
                 className="w-full p-3.5 bg-gray-900/80 hover:bg-indigo-950/40 border border-gray-800 hover:border-indigo-400 text-right rounded-xl transition-all duration-150 flex items-start justify-end gap-2.5 shadow hover:shadow-indigo-950 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 focus-visible:bg-indigo-950/40 focus-visible:border-indigo-400 focus-visible:shadow-indigo-950"
               >
+                <span className="sr-only">{getAffectedResourcesText(currentCard.rightChoice)}</span>
                 <div className="order-2 w-5 h-5 rounded-full bg-indigo-950 border border-indigo-700/60 flex items-center justify-center text-[10px] text-indigo-400 font-bold shrink-0 mt-0.5">
                   <ChevronRight className="w-3.5 h-3.5" />
                 </div>
