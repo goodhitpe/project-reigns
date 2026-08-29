@@ -196,6 +196,23 @@ export default function App() {
 
   const isDangerZone = (value: number) => value <= 20 || value >= 80;
 
+  const getAffectedStatsText = (choice: Choice) => {
+    const nameMap: { [key: string]: string } = {
+      budget: '예산',
+      scheduleSlack: '일정 여유',
+      teamMorale: '팀 사기',
+      quality: '품질'
+    };
+
+    const affected = Object.entries(choice.effects)
+      .filter(([_, value]) => value !== 0)
+      .map(([key, _]) => nameMap[key])
+      .join(', ');
+
+    if (!affected) return '';
+    return `예상 변동 수치: ${affected}`;
+  };
+
   return (
     <div className="max-w-md mx-auto min-h-screen bg-gray-950 flex flex-col shadow-2xl relative border-x border-gray-800">
 
@@ -459,6 +476,7 @@ export default function App() {
                     <kbd className="hidden sm:inline-block px-1 py-0.5 bg-gray-800 text-gray-400 rounded text-[9px] border border-gray-700 font-mono" aria-hidden="true">[←]</kbd>
                   </div>
                   <div className="text-xs font-semibold text-gray-200 mt-0.5">{currentCard.leftChoice.text}</div>
+                  <span className="sr-only">{getAffectedStatsText(currentCard.leftChoice)}</span>
                 </div>
               </button>
 
@@ -481,6 +499,7 @@ export default function App() {
                     오른쪽 선택
                   </div>
                   <div className="text-xs font-semibold text-gray-200 mt-0.5">{currentCard.rightChoice.text}</div>
+                  <span className="sr-only">{getAffectedStatsText(currentCard.rightChoice)}</span>
                 </div>
               </button>
 
