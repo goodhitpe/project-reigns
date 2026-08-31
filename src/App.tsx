@@ -75,6 +75,23 @@ export default function App() {
     setGameState('PLAYING');
   };
 
+  // Helper to format effects for logs and screen readers
+  const getEffectsSummary = (effects: any) => {
+    return Object.entries(effects)
+      .filter(([_, value]: [string, any]) => value !== 0)
+      .map(([key, value]: [string, any]) => {
+        const sign = value > 0 ? '+' : '';
+        const nameMap: { [key: string]: string } = {
+          budget: '예산',
+          scheduleSlack: '일정 여유',
+          teamMorale: '팀 사기',
+          quality: '품질'
+        };
+        return `${nameMap[key]} ${sign}${value}%`;
+      })
+      .join(', ');
+  };
+
   // Process selected choice
   const makeChoice = (choice: Choice) => {
     if (!currentCard) return;
@@ -88,19 +105,7 @@ export default function App() {
     };
 
     // Update log
-    const outcomeDesc = Object.entries(choice.effects)
-      .filter(([_, value]) => value !== 0)
-      .map(([key, value]) => {
-        const sign = value > 0 ? '+' : '';
-        const nameMap: { [key: string]: string } = {
-          budget: '예산',
-          scheduleSlack: '일정 여유',
-          teamMorale: '팀 사기',
-          quality: '품질'
-        };
-        return `${nameMap[key]} ${sign}${value}%`;
-      })
-      .join(', ');
+    const outcomeDesc = getEffectsSummary(choice.effects);
 
     const newLogEntry: LogEntry = {
       turn,
@@ -459,6 +464,7 @@ export default function App() {
                     <kbd className="hidden sm:inline-block px-1 py-0.5 bg-gray-800 text-gray-400 rounded text-[9px] border border-gray-700 font-mono" aria-hidden="true">[←]</kbd>
                   </div>
                   <div className="text-xs font-semibold text-gray-200 mt-0.5">{currentCard.leftChoice.text}</div>
+                  <span className="sr-only">예상 결과: {getEffectsSummary(currentCard.leftChoice.effects)}</span>
                 </div>
               </button>
 
@@ -481,6 +487,7 @@ export default function App() {
                     오른쪽 선택
                   </div>
                   <div className="text-xs font-semibold text-gray-200 mt-0.5">{currentCard.rightChoice.text}</div>
+                  <span className="sr-only">예상 결과: {getEffectsSummary(currentCard.rightChoice.effects)}</span>
                 </div>
               </button>
 
