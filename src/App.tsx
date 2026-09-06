@@ -196,6 +196,17 @@ export default function App() {
 
   const isDangerZone = (value: number) => value <= 20 || value >= 80;
 
+  // Helper to summarize choice effects for screen readers
+  const getEffectSummary = (choice: Choice) => {
+    const effects = [];
+    if (choice.effects.budget !== 0) effects.push('예산');
+    if (choice.effects.scheduleSlack !== 0) effects.push('일정');
+    if (choice.effects.teamMorale !== 0) effects.push('사기');
+    if (choice.effects.quality !== 0) effects.push('품질');
+    if (effects.length === 0) return '예상 영향 없음';
+    return `예상 영향: ${effects.join(', ')} 변동`;
+  };
+
   return (
     <div className="max-w-md mx-auto min-h-screen bg-gray-950 flex flex-col shadow-2xl relative border-x border-gray-800">
 
@@ -458,7 +469,10 @@ export default function App() {
                     왼쪽 선택
                     <kbd className="hidden sm:inline-block px-1 py-0.5 bg-gray-800 text-gray-400 rounded text-[9px] border border-gray-700 font-mono" aria-hidden="true">[←]</kbd>
                   </div>
-                  <div className="text-xs font-semibold text-gray-200 mt-0.5">{currentCard.leftChoice.text}</div>
+                  <div className="text-xs font-semibold text-gray-200 mt-0.5">
+                    {currentCard.leftChoice.text}
+                    <span className="sr-only"> ({getEffectSummary(currentCard.leftChoice)})</span>
+                  </div>
                 </div>
               </button>
 
@@ -480,7 +494,10 @@ export default function App() {
                     <kbd className="hidden sm:inline-block px-1 py-0.5 bg-gray-800 text-gray-400 rounded text-[9px] border border-gray-700 font-mono" aria-hidden="true">[→]</kbd>
                     오른쪽 선택
                   </div>
-                  <div className="text-xs font-semibold text-gray-200 mt-0.5">{currentCard.rightChoice.text}</div>
+                  <div className="text-xs font-semibold text-gray-200 mt-0.5">
+                    {currentCard.rightChoice.text}
+                    <span className="sr-only"> ({getEffectSummary(currentCard.rightChoice)})</span>
+                  </div>
                 </div>
               </button>
 
