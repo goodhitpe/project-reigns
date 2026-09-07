@@ -194,6 +194,22 @@ export default function App() {
     return choice.effects[resource] !== 0;
   };
 
+  const getChoiceEffectSummary = (choice: Choice) => {
+    const affected = Object.entries(choice.effects)
+      .filter(([_, value]) => value !== 0)
+      .map(([key]) => {
+        const nameMap: { [key: string]: string } = {
+          budget: '예산',
+          scheduleSlack: '일정 여유',
+          teamMorale: '팀 사기',
+          quality: '품질'
+        };
+        return nameMap[key];
+      });
+    if (affected.length === 0) return '';
+    return ` (예상 영향: ${affected.join(', ')})`;
+  };
+
   const isDangerZone = (value: number) => value <= 20 || value >= 80;
 
   return (
@@ -458,7 +474,10 @@ export default function App() {
                     왼쪽 선택
                     <kbd className="hidden sm:inline-block px-1 py-0.5 bg-gray-800 text-gray-400 rounded text-[9px] border border-gray-700 font-mono" aria-hidden="true">[←]</kbd>
                   </div>
-                  <div className="text-xs font-semibold text-gray-200 mt-0.5">{currentCard.leftChoice.text}</div>
+                  <div className="text-xs font-semibold text-gray-200 mt-0.5">
+                    {currentCard.leftChoice.text}
+                    <span className="sr-only">{getChoiceEffectSummary(currentCard.leftChoice)}</span>
+                  </div>
                 </div>
               </button>
 
@@ -480,7 +499,10 @@ export default function App() {
                     <kbd className="hidden sm:inline-block px-1 py-0.5 bg-gray-800 text-gray-400 rounded text-[9px] border border-gray-700 font-mono" aria-hidden="true">[→]</kbd>
                     오른쪽 선택
                   </div>
-                  <div className="text-xs font-semibold text-gray-200 mt-0.5">{currentCard.rightChoice.text}</div>
+                  <div className="text-xs font-semibold text-gray-200 mt-0.5">
+                    {currentCard.rightChoice.text}
+                    <span className="sr-only">{getChoiceEffectSummary(currentCard.rightChoice)}</span>
+                  </div>
                 </div>
               </button>
 
