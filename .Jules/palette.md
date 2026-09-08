@@ -17,3 +17,7 @@
 ## 2025-02-28 - Dual-Extreme Dangers in Balance Mechanics
 **Learning:** In choice/balance-based game mechanics (like Reigns), standard progress bars mislead users by implicitly suggesting 100% is a "good" or "max" state. Since both 0% and 100% cause failure, relying purely on fill length fails to communicate the true risk of overflowing a stat.
 **Action:** When working with dual-extreme stats, always add conditional "danger zone" styling (e.g. `<= 20` and `>= 80`) using urgent colors (`bg-rose-500`, `animate-pulse`), and explicitly append `<span className="sr-only">(위험)</span>` for screen readers so the critical state is clear to all users.
+
+## 2025-02-28 - Screen Reader Parity for Interactive Effects
+**Learning:** In Reigns-style choice interfaces, visually users can see hover feedback (like pings on stats gauges) indicating which resources will be affected by a choice. However, screen reader users only hear the choice text and do not receive parity of information regarding the interactive effects, lacking context of what consequences their choice will have on the game state.
+**Action:** Inject visually hidden (`sr-only`) summaries of interactive effects into choice buttons, mirroring the information provided by visual hover feedback. Ensure this text is localized correctly.
