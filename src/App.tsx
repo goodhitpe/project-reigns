@@ -196,6 +196,16 @@ export default function App() {
 
   const isDangerZone = (value: number) => value <= 20 || value >= 80;
 
+  // Helper for generating screen-reader text for choice effects
+  const getEffectsSrText = (choice: Choice) => {
+    const affected = [];
+    if (choice.effects.budget !== 0) affected.push('예산');
+    if (choice.effects.scheduleSlack !== 0) affected.push('일정');
+    if (choice.effects.teamMorale !== 0) affected.push('사기');
+    if (choice.effects.quality !== 0) affected.push('품질');
+    return affected.length > 0 ? `(예상 변동: ${affected.join(', ')})` : '(예상 변동 없음)';
+  };
+
   return (
     <div className="max-w-md mx-auto min-h-screen bg-gray-950 flex flex-col shadow-2xl relative border-x border-gray-800">
 
@@ -450,15 +460,19 @@ export default function App() {
                 onClick={() => makeChoice(currentCard.leftChoice)}
                 className="w-full p-3.5 bg-gray-900/80 hover:bg-teal-950/40 border border-gray-800 hover:border-teal-400 text-left rounded-xl transition-all duration-150 flex items-start gap-2.5 shadow hover:shadow-teal-950 focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-400 focus-visible:bg-teal-950/40 focus-visible:border-teal-400 focus-visible:shadow-teal-950"
               >
-                <div className="w-5 h-5 rounded-full bg-teal-950 border border-teal-700/60 flex items-center justify-center text-[10px] text-teal-400 font-bold shrink-0 mt-0.5">
+                <div className="w-5 h-5 rounded-full bg-teal-950 border border-teal-700/60 flex items-center justify-center text-[10px] text-teal-400 font-bold shrink-0 mt-0.5" aria-hidden="true">
                   <ChevronLeft className="w-3.5 h-3.5" />
                 </div>
                 <div>
-                  <div className="text-[11px] font-black tracking-wide text-teal-400 uppercase flex items-center gap-1.5">
+                  <div className="text-[11px] font-black tracking-wide text-teal-400 uppercase flex items-center gap-1.5" aria-hidden="true">
                     왼쪽 선택
                     <kbd className="hidden sm:inline-block px-1 py-0.5 bg-gray-800 text-gray-400 rounded text-[9px] border border-gray-700 font-mono" aria-hidden="true">[←]</kbd>
                   </div>
-                  <div className="text-xs font-semibold text-gray-200 mt-0.5">{currentCard.leftChoice.text}</div>
+                  <div className="text-xs font-semibold text-gray-200 mt-0.5">
+                    <span className="sr-only">왼쪽 선택: </span>
+                    {currentCard.leftChoice.text}
+                    <span className="sr-only"> {getEffectsSrText(currentCard.leftChoice)}</span>
+                  </div>
                 </div>
               </button>
 
@@ -472,15 +486,19 @@ export default function App() {
                 onClick={() => makeChoice(currentCard.rightChoice)}
                 className="w-full p-3.5 bg-gray-900/80 hover:bg-indigo-950/40 border border-gray-800 hover:border-indigo-400 text-right rounded-xl transition-all duration-150 flex items-start justify-end gap-2.5 shadow hover:shadow-indigo-950 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 focus-visible:bg-indigo-950/40 focus-visible:border-indigo-400 focus-visible:shadow-indigo-950"
               >
-                <div className="order-2 w-5 h-5 rounded-full bg-indigo-950 border border-indigo-700/60 flex items-center justify-center text-[10px] text-indigo-400 font-bold shrink-0 mt-0.5">
+                <div className="order-2 w-5 h-5 rounded-full bg-indigo-950 border border-indigo-700/60 flex items-center justify-center text-[10px] text-indigo-400 font-bold shrink-0 mt-0.5" aria-hidden="true">
                   <ChevronRight className="w-3.5 h-3.5" />
                 </div>
                 <div className="order-1">
-                  <div className="text-[11px] font-black tracking-wide text-indigo-400 uppercase flex items-center gap-1.5 justify-end">
+                  <div className="text-[11px] font-black tracking-wide text-indigo-400 uppercase flex items-center gap-1.5 justify-end" aria-hidden="true">
                     <kbd className="hidden sm:inline-block px-1 py-0.5 bg-gray-800 text-gray-400 rounded text-[9px] border border-gray-700 font-mono" aria-hidden="true">[→]</kbd>
                     오른쪽 선택
                   </div>
-                  <div className="text-xs font-semibold text-gray-200 mt-0.5">{currentCard.rightChoice.text}</div>
+                  <div className="text-xs font-semibold text-gray-200 mt-0.5">
+                    <span className="sr-only">오른쪽 선택: </span>
+                    {currentCard.rightChoice.text}
+                    <span className="sr-only"> {getEffectsSrText(currentCard.rightChoice)}</span>
+                  </div>
                 </div>
               </button>
 
