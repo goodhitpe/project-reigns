@@ -416,11 +416,11 @@ export default function App() {
             </div>
 
             {/* Active Card Card */}
-            <div className="flex-1 flex flex-col justify-center items-center py-4 relative">
-              <div className="w-full max-w-xs bg-gray-900 border border-gray-800 rounded-2xl p-5 flex flex-col items-center justify-between min-h-[300px] shadow-2xl relative overflow-hidden">
+            <div className="flex-1 flex flex-col justify-center items-center py-4 relative" aria-live="polite" aria-atomic="true">
+              <div key={currentCard.id} className="w-full max-w-xs bg-gray-900 border border-gray-800 rounded-2xl p-5 flex flex-col items-center justify-between min-h-[300px] shadow-2xl relative overflow-hidden transition-opacity duration-300">
 
                 {/* Decorative Tech Grid */}
-                <div className="absolute inset-0 bg-[linear-gradient(to_right,#0f172a_1px,transparent_1px),linear-gradient(to_bottom,#0f172a_1px,transparent_1px)] bg-[size:2rem_2rem] opacity-30 pointer-events-none"></div>
+                <div className="absolute inset-0 bg-[linear-gradient(to_right,#0f172a_1px,transparent_1px),linear-gradient(to_bottom,#0f172a_1px,transparent_1px)] bg-[size:2rem_2rem] opacity-30 pointer-events-none" aria-hidden="true"></div>
 
                 {/* Card Character Role Badge */}
                 <div className="z-10 bg-teal-950/60 border border-teal-800/80 px-2.5 py-0.5 rounded-full text-[10px] font-bold text-teal-400 uppercase tracking-widest">
@@ -428,13 +428,16 @@ export default function App() {
                 </div>
 
                 {/* Character Avatar/Emoji */}
-                <div className="z-10 w-20 h-20 rounded-full bg-gray-800 border-2 border-teal-500/30 flex items-center justify-center text-4xl shadow-lg mt-3 mb-2 animate-float">
+                <div className="z-10 w-20 h-20 rounded-full bg-gray-800 border-2 border-teal-500/30 flex items-center justify-center text-4xl shadow-lg mt-3 mb-2 animate-float" aria-hidden="true">
                   {currentCard.avatar}
                 </div>
 
                 {/* Character Name */}
                 <div className="z-10 text-center">
-                  <h3 className="font-bold text-sm text-gray-100">{currentCard.character}</h3>
+                  <h3 className="font-bold text-sm text-gray-100">
+                    <span className="sr-only">새로운 이벤트: </span>
+                    {currentCard.character}
+                  </h3>
                 </div>
 
                 {/* Character Dialogue */}
