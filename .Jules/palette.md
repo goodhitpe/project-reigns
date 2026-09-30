@@ -21,3 +21,7 @@
 ## 2025-02-28 - Screen Reader Parity for Interactive Choice Effects
 **Learning:** Visual hover feedback (like glowing icons or tooltip warnings on decision options) informs sighted players about upcoming state changes, but screen reader users miss these consequences when navigating interactive controls.
 **Action:** Inject visually hidden (`sr-only`) summaries of interactive effects inside choice buttons in the local language so screen readers announce expected resource consequences on focus.
+
+## 2025-02-28 - Narrating SPA Card Updates Without Forced Focus
+**Learning:** In Single Page Applications where the main UI element updates dynamically without moving focus (like drawing a new card while focus remains on the choice button), screen reader users are not automatically informed of the new state.
+**Action:** Wrap the dynamic content area in an `aria-live="polite"` `aria-atomic="true"` container and add a visually hidden (sr-only) context label so screen readers smoothly narrate the new content without unnatural focus shifts.
