@@ -422,31 +422,34 @@ export default function App() {
                 {/* Decorative Tech Grid */}
                 <div className="absolute inset-0 bg-[linear-gradient(to_right,#0f172a_1px,transparent_1px),linear-gradient(to_bottom,#0f172a_1px,transparent_1px)] bg-[size:2rem_2rem] opacity-30 pointer-events-none"></div>
 
-                {/* Card Character Role Badge */}
-                <div className="z-10 bg-teal-950/60 border border-teal-800/80 px-2.5 py-0.5 rounded-full text-[10px] font-bold text-teal-400 uppercase tracking-widest">
-                  {currentCard.role}
-                </div>
+                <div aria-live="polite" aria-atomic="true" className="w-full flex-1 flex flex-col items-center justify-between">
+                  <span className="sr-only">새로운 상황:</span>
+                  {/* Card Character Role Badge */}
+                  <div className="z-10 bg-teal-950/60 border border-teal-800/80 px-2.5 py-0.5 rounded-full text-[10px] font-bold text-teal-400 uppercase tracking-widest">
+                    {currentCard.role}
+                  </div>
 
-                {/* Character Avatar/Emoji */}
-                <div className="z-10 w-20 h-20 rounded-full bg-gray-800 border-2 border-teal-500/30 flex items-center justify-center text-4xl shadow-lg mt-3 mb-2 animate-float">
-                  {currentCard.avatar}
-                </div>
+                  {/* Character Avatar/Emoji */}
+                  <div className="z-10 w-20 h-20 rounded-full bg-gray-800 border-2 border-teal-500/30 flex items-center justify-center text-4xl shadow-lg mt-3 mb-2 animate-float" aria-hidden="true">
+                    {currentCard.avatar}
+                  </div>
 
-                {/* Character Name */}
-                <div className="z-10 text-center">
-                  <h3 className="font-bold text-sm text-gray-100">{currentCard.character}</h3>
-                </div>
+                  {/* Character Name */}
+                  <div className="z-10 text-center">
+                    <h3 className="font-bold text-sm text-gray-100">{currentCard.character}</h3>
+                  </div>
 
-                {/* Character Dialogue */}
-                <div className="z-10 mt-3 text-center flex-1 flex items-center justify-center">
-                  <p className="text-xs text-gray-200 leading-relaxed font-medium bg-gray-950/50 p-2.5 rounded-xl border border-gray-800/50">
-                    {currentCard.dialogue}
-                  </p>
+                  {/* Character Dialogue */}
+                  <div className="z-10 mt-3 text-center flex-1 flex items-center justify-center">
+                    <p className="text-xs text-gray-200 leading-relaxed font-medium bg-gray-950/50 p-2.5 rounded-xl border border-gray-800/50">
+                      {currentCard.dialogue}
+                    </p>
+                  </div>
                 </div>
 
                 {/* Quick Hint Tooltip on Choice Hover */}
                 {hoveredChoice && (
-                  <div className="absolute bottom-2 left-2 right-2 bg-teal-900/90 text-teal-100 border border-teal-700 text-[10px] py-1 px-2 rounded text-center z-20 font-bold backdrop-blur-sm animate-pulse">
+                  <div className="absolute bottom-2 left-2 right-2 bg-teal-900/90 text-teal-100 border border-teal-700 text-[10px] py-1 px-2 rounded text-center z-20 font-bold backdrop-blur-sm animate-pulse" aria-hidden="true">
                     ⚠️ {hoveredChoice === 'LEFT' ? '왼쪽 선택지' : '오른쪽 선택지'}에 따라 상단 게이지가 변동됩니다!
                   </div>
                 )}
