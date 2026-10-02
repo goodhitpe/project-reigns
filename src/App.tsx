@@ -416,7 +416,12 @@ export default function App() {
             </div>
 
             {/* Active Card Card */}
-            <div className="flex-1 flex flex-col justify-center items-center py-4 relative">
+            <div
+              className="flex-1 flex flex-col justify-center items-center py-4 relative"
+              aria-live="polite"
+              aria-atomic="true"
+            >
+              <span className="sr-only">새로운 상황:</span>
               <div className="w-full max-w-xs bg-gray-900 border border-gray-800 rounded-2xl p-5 flex flex-col items-center justify-between min-h-[300px] shadow-2xl relative overflow-hidden">
 
                 {/* Decorative Tech Grid */}
