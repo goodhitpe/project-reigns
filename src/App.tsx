@@ -417,7 +417,11 @@ export default function App() {
 
             {/* Active Card Card */}
             <div className="flex-1 flex flex-col justify-center items-center py-4 relative">
-              <div className="w-full max-w-xs bg-gray-900 border border-gray-800 rounded-2xl p-5 flex flex-col items-center justify-between min-h-[300px] shadow-2xl relative overflow-hidden">
+              <div
+                className="w-full max-w-xs bg-gray-900 border border-gray-800 rounded-2xl p-5 flex flex-col items-center justify-between min-h-[300px] shadow-2xl relative overflow-hidden"
+                aria-live="polite"
+                aria-atomic="true"
+              >
 
                 {/* Decorative Tech Grid */}
                 <div className="absolute inset-0 bg-[linear-gradient(to_right,#0f172a_1px,transparent_1px),linear-gradient(to_bottom,#0f172a_1px,transparent_1px)] bg-[size:2rem_2rem] opacity-30 pointer-events-none"></div>
@@ -428,12 +432,13 @@ export default function App() {
                 </div>
 
                 {/* Character Avatar/Emoji */}
-                <div className="z-10 w-20 h-20 rounded-full bg-gray-800 border-2 border-teal-500/30 flex items-center justify-center text-4xl shadow-lg mt-3 mb-2 animate-float">
+                <div className="z-10 w-20 h-20 rounded-full bg-gray-800 border-2 border-teal-500/30 flex items-center justify-center text-4xl shadow-lg mt-3 mb-2 animate-float" aria-hidden="true">
                   {currentCard.avatar}
                 </div>
 
                 {/* Character Name */}
                 <div className="z-10 text-center">
+                  <span className="sr-only">새로운 상황 발생: </span>
                   <h3 className="font-bold text-sm text-gray-100">{currentCard.character}</h3>
                 </div>
 
