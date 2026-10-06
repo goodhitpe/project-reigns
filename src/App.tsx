@@ -422,26 +422,30 @@ export default function App() {
                 {/* Decorative Tech Grid */}
                 <div className="absolute inset-0 bg-[linear-gradient(to_right,#0f172a_1px,transparent_1px),linear-gradient(to_bottom,#0f172a_1px,transparent_1px)] bg-[size:2rem_2rem] opacity-30 pointer-events-none"></div>
 
-                {/* Card Character Role Badge */}
-                <div className="z-10 bg-teal-950/60 border border-teal-800/80 px-2.5 py-0.5 rounded-full text-[10px] font-bold text-teal-400 uppercase tracking-widest">
-                  {currentCard.role}
-                </div>
+                <div aria-live="polite" aria-atomic="true" className="flex flex-col items-center w-full flex-1 z-10 relative">
+                  <span className="sr-only">새로운 상황 발생:</span>
 
-                {/* Character Avatar/Emoji */}
-                <div className="z-10 w-20 h-20 rounded-full bg-gray-800 border-2 border-teal-500/30 flex items-center justify-center text-4xl shadow-lg mt-3 mb-2 animate-float">
-                  {currentCard.avatar}
-                </div>
+                  {/* Card Character Role Badge */}
+                  <div className="bg-teal-950/60 border border-teal-800/80 px-2.5 py-0.5 rounded-full text-[10px] font-bold text-teal-400 uppercase tracking-widest">
+                    {currentCard.role}
+                  </div>
 
-                {/* Character Name */}
-                <div className="z-10 text-center">
-                  <h3 className="font-bold text-sm text-gray-100">{currentCard.character}</h3>
-                </div>
+                  {/* Character Avatar/Emoji */}
+                  <div className="w-20 h-20 rounded-full bg-gray-800 border-2 border-teal-500/30 flex items-center justify-center text-4xl shadow-lg mt-3 mb-2 animate-float">
+                    {currentCard.avatar}
+                  </div>
 
-                {/* Character Dialogue */}
-                <div className="z-10 mt-3 text-center flex-1 flex items-center justify-center">
-                  <p className="text-xs text-gray-200 leading-relaxed font-medium bg-gray-950/50 p-2.5 rounded-xl border border-gray-800/50">
-                    {currentCard.dialogue}
-                  </p>
+                  {/* Character Name */}
+                  <div className="text-center">
+                    <h3 className="font-bold text-sm text-gray-100">{currentCard.character}</h3>
+                  </div>
+
+                  {/* Character Dialogue */}
+                  <div className="mt-3 text-center flex-1 flex items-center justify-center">
+                    <p className="text-xs text-gray-200 leading-relaxed font-medium bg-gray-950/50 p-2.5 rounded-xl border border-gray-800/50">
+                      {currentCard.dialogue}
+                    </p>
+                  </div>
                 </div>
 
                 {/* Quick Hint Tooltip on Choice Hover */}
