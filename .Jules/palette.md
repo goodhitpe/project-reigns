@@ -21,3 +21,7 @@
 ## 2025-02-28 - Screen Reader Parity for Interactive Choice Effects
 **Learning:** Visual hover feedback (like glowing icons or tooltip warnings on decision options) informs sighted players about upcoming state changes, but screen reader users miss these consequences when navigating interactive controls.
 **Action:** Inject visually hidden (`sr-only`) summaries of interactive effects inside choice buttons in the local language so screen readers announce expected resource consequences on focus.
+
+## 2025-02-28 - Dynamic Context Updates for Choice Mechanics
+**Learning:** In SPAs with choice mechanics (where action buttons maintain persistent focus after click), relying purely on visual UI updates leaves screen reader users unaware that a new scenario or state has loaded, leading to a disconnected experience.
+**Action:** Wrap dynamic content areas (like a game card) in `aria-live="polite" aria-atomic="true"` regions and optionally inject a hidden context hint (`<span className="sr-only">새로운 상황 발생:</span>`) to ensure screen readers naturally narrate new state changes without unnatural focus shifting.
